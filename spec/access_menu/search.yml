@@ -1,0 +1,20 @@
+AccessMenu Information Search
+---
+tags:
+  - Access
+parameters:
+  - name: body
+    in: body
+    required: false
+    schema:
+      type: object
+      properties:
+          data:
+            type: object
+            properties:
+              role:
+                type: string
+                example: ADMIN
+responses:
+ 200:
+   description: A single user item

@@ -1,0 +1,67 @@
+Consumer Information
+---
+tags:
+  - Consumer
+parameters:
+  - name: body
+    in: body
+    schema:
+        type: object
+        properties:
+            data:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        example: null
+                    name:
+                      type: string
+                      example: "abcd Consumer"
+                    mobile:
+                      type: string
+                      example: "123456789"
+                    address:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: null
+                        city:
+                          type: string
+                          example: "abcd"
+                        country:
+                          type: string
+                          example: "India"
+                        lane:
+                          type: string
+                          example: "abcd"
+                        state:
+                          type: string
+                          example: "abcd"
+                        zipcode:
+                          type: string
+                          example: "516789"
+                    email:
+                      type: string
+                      example: "main@branch.com"
+                    aadhar:
+                      type: string
+                      example: "628079361300"
+                    img:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: null
+                        name:
+                          type: string
+                          example: "abcd"
+                        src:
+                          type: string
+                          example: "source"
+                    active:
+                      type: boolean
+                      example: true
+responses:
+    200:
+        description: "status:1 is success; status: 0 is failure;"

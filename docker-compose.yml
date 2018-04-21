@@ -1,0 +1,8 @@
+version: '2.0'
+services:
+  web:
+    build: .
+    ports:
+     - "2001:2001"
+    environment:
+     - WEB_ENV=${WEB_ENV}

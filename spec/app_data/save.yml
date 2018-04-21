@@ -1,0 +1,33 @@
+AppData Information
+---
+tags:
+  - AppData
+parameters:
+  - name: body
+    in: body
+    schema:
+        type: object
+        properties:
+            data:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        example: null
+                    name:
+                      type: string
+                      example: "abcd"
+                    code:
+                      type: string
+                      example: "ABCD"
+                    data:
+                      type: string
+                      example: "ABCD"
+                    active:
+                      type: boolean
+                      example: true
+
+
+responses:
+    200:
+        description: "status:1 is success; status: 0 is failure;"

@@ -1,0 +1,82 @@
+Branch Information
+---
+tags:
+  - Branch
+parameters:
+  - name: body
+    in: body
+    schema:
+        type: object
+        properties:
+            data:
+                type: object
+                properties:
+                    id:
+                        type: string
+                        example: null
+                    name:
+                      type: string
+                      example: "abcd branch"
+                    address:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: null
+                        city:
+                          type: string
+                          example: "abcd"
+                        country:
+                          type: string
+                          example: "India"
+                        lane:
+                          type: string
+                          example: "abcd"
+                        state:
+                          type: string
+                          example: "abcd"
+                        zipcode:
+                          type: string
+                          example: "516789"
+                    img:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: null
+                        name:
+                          type: string
+                          example: "abcd"
+                        src:
+                          type: string
+                          example: "source"
+                    email:
+                      type: string
+                      example: "main@branch.com"
+                    isMain:
+                      type: boolean
+                      example: false
+                    lat:
+                      type: string
+                      example: "0.00000000000"
+                    lng:
+                      type: string
+                      example: "0.00000000000"
+                    mobile:
+                      type: string
+                      example: "123456789"
+                    pan:
+                      type: string
+                      example: "1234qwer"
+                    phone:
+                      type: string
+                      example: "123456789"
+                    tan:
+                      type: string
+                      example: "1234asdf"
+                    active:
+                      type: boolean
+                      example: true
+responses:
+    200:
+        description: "status:1 is success; status: 0 is failure;"

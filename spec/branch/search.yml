@@ -1,0 +1,20 @@
+Branch Information Search
+---
+tags:
+  - Branch
+parameters:
+  - name: body
+    in: body
+    required: false
+    schema:
+      type: object
+      properties:
+          data:
+            type: object
+            properties:
+              name:
+                type: string
+                example: abcd
+responses:
+ 200:
+   description: A single user item

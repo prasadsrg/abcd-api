@@ -5,4 +5,4 @@ services:
     ports:
      - "2001:2001"
     environment:
-     - WEB_ENV="DEV"
+     - WEB_ENV=PROD

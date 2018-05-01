@@ -13,7 +13,7 @@ class ProfileResource (Resource):
     @jwt_required()
     @swag_from('../../spec/profile/save.yml')
     def put(self):
-        try :
+        try:
             self.profile_service.session_info = current_identity
             req_json = json.loads(request.data)
             req_data = req_json.get('data', None)

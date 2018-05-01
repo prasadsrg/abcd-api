@@ -15,7 +15,7 @@ class BranchService:
     def mapping(self, model, view):
         print(self.session_info)
         if model.id is None:
-            model.id = uid()
+            model.id = (self.session_info['vid']+'_'+view['name'].replace(" ", "_")).upper()[0:30]
             model.address = AddressModel()
             model.address.id = model.id
             model.img = ImgModel()

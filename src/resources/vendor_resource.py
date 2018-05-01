@@ -46,7 +46,7 @@ class VendorResource (Resource):
         return jsonify(res_json)
 
     @jwt_required()
-    @swag_from('../../spec/profile/entity.yml')
+    @swag_from('../../spec/vendor/entity.yml')
     def get(self):
         try:
             self.vendor_service.session_info = current_identity

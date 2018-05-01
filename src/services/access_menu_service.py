@@ -21,6 +21,8 @@ class AccessMenuService:
                 raise Exception('Not a valid record!')
             else:
                 access_menu = session.query(AccessMenuModel).filter_by(id=_id).first()
+            if access_menu is None:
+                raise Exception('Not a valid record!')
             self.mapping(access_menu, item)
             session.add(access_menu)
         session.commit()

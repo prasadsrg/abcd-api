@@ -10,7 +10,8 @@ class AppDataService:
 
     def mapping(self, model, view):
         if model.id is None:
-            model.id = uid()
+            view['data'] = view['name'].upper()
+            model.id = (view['code']+'_'+view['data'])[0:30]
 
         model.vid = self.session_info['vid']
         model.updatedBy = self.session_info['id']

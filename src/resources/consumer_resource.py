@@ -48,7 +48,7 @@ class ConsumerResource (Resource):
         return jsonify(res_json)
 
     @jwt_required()
-    @swag_from('../../spec/profile/entity.yml')
+    @swag_from('../../spec/consumer/entity.yml')
     def get(self):
         try:
             self.consumer_service.session_info = current_identity

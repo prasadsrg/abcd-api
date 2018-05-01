@@ -67,13 +67,13 @@ parameters:
                       example: "628079361300"
                     password:
                       type: string
-                      example: "00000000000"
+                      example: "1111"
                     mobile:
                       type: string
-                      example: "123456789"
+                      example: "123456781"
                     phone:
                       type: string
-                      example: "123456789"
+                      example: "123456781"
                     role:
                       type: string
                       example: "Anonymous"

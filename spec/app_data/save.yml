@@ -16,13 +16,13 @@ parameters:
                         example: null
                     name:
                       type: string
-                      example: "abcd"
+                      example: "cash"
                     code:
                       type: string
-                      example: "ABCD"
+                      example: "PAYMENT_MODE"
                     data:
                       type: string
-                      example: "ABCD"
+                      example: "CASH"
                     active:
                       type: boolean
                       example: true

@@ -10,20 +10,22 @@ parameters:
       type: object
       properties:
         data:
-          type: object
-          properties:
-            id:
-              type: string
-              example: UID_ADMIN_ACCESS_MENU
-            name:
-              type: string
-              example: Access Menu
-            priority:
-              type: integer
-              example: 9
-            active:
-              type: boolean
-              example: true
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                example: DFF_ADMIN_ACCESS_MENU
+              name:
+                type: string
+                example: Access Menu
+              priority:
+                type: integer
+                example: 9
+              active:
+                type: boolean
+                example: true
 responses:
     200:
         description: "status:1 is success"

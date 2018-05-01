@@ -1,5 +1,5 @@
-create database gothram;
-use gothram;
+create database abcd;
+use abcd;
 create table access_log_data ( data text, updated_on datetime default now() );
 
 create table access_data (

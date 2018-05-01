@@ -5,7 +5,7 @@ class Config(object):
     HOST = '0.0.0.0'
     PORT = 2001
     SECRET_KEY = 'p9Bv<3Eid9%$i01'
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:Admin!234@localhost/abcd'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:Admin!234@qa.dfftech.com:3306/abcd'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     # Put any configurations here that are common across all environments
 

@@ -1,0 +1,20 @@
+DataReport information
+---
+tags:
+  - Data
+parameters:
+  - name: code
+    in: query
+    required: true
+    type: string
+  - name: key
+    in: query
+    required: false
+    type: string
+  - name: param
+    in: query
+    required: false
+    type: string
+responses:
+    200:
+        description: "status:1 is success; status: 0 is failure;"

@@ -1,7 +1,7 @@
-AccessData information
+DataLoad information
 ---
 tags:
-  - Access
+  - Data
 parameters:
   - name: code
     in: query

@@ -51,6 +51,11 @@ api.add_resource(AccessDataResource, '/access_data')
 from resources.app_data_resource import AppDataResource
 api.add_resource(AppDataResource, '/app_data')
 
+from resources.data_load_resource import DataLoadResource
+api.add_resource(DataLoadResource, '/data_load')
+
+from resources.data_report_resource import DataReportResource
+api.add_resource(DataReportResource, '/reports/download/monthly')
 
 # @app.after_request
 # def after_request(response):

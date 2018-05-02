@@ -27,10 +27,9 @@ class DataReportService:
             """
         try:
             query_sets = db.engine.execute(text(sql)).fetchall()
-            print(query_sets)
+            print(query_sets[0].items())
             if (len(query_sets)) != 0:
-                res_data = [['Name', 'Mobile','Email', 'Aadhar', 'Lane', 'LandMark', 'City', 'State', 'Country', 'Zipcode']] + \
-                           [list(i) for i in query_sets]
+                res_data = [[i[0] for i in query_sets[0].items()]] + [list(i) for i in query_sets]
                 sheet = p.Sheet(res_data)
                 output = make_response(sheet.xls)
                 output.headers["Content-Disposition"] = "attachment; filename=export.xls"

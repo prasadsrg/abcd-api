@@ -5,3 +5,5 @@ Flask-SQLAlchemy
 mysqlclient
 flasgger
 pyexcel
+pyexcel-xls
+pyexcel-xlsx

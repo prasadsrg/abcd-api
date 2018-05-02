@@ -19,7 +19,7 @@ class DataReportResource (Resource):
             key = request.args.get('key')
             param = request.args.get('param')
             res_data = eval("self.data_report_service.{}".format(code+"(key, param)"))
-            res_json = {'status': 1, 'data': res_data}
+            res_json = res_data
         except Exception as e:
             print(e)
             if e.args:
@@ -27,5 +27,4 @@ class DataReportResource (Resource):
             else:
                 res_data = e
             res_json = {'status': 0, 'error': res_data}
-
-        return jsonify(res_json)
+        return res_json

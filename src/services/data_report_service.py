@@ -29,11 +29,12 @@ class DataReportService:
             query_sets = db.engine.execute(text(sql)).fetchall()
             print(query_sets)
             if (len(query_sets)) != 0:
-                res_data = [[i[0] for i in query_sets[0].items()]] + [list(i) for i in query_sets]
+                res_data = [['Name', 'Mobile','Email', 'Aadhar', 'Lane', 'LandMark', 'City', 'State', 'Country', 'Zipcode']] + \
+                           [list(i) for i in query_sets]
                 sheet = p.Sheet(res_data)
                 output = make_response(sheet.xls)
                 output.headers["Content-Disposition"] = "attachment; filename=export.xls"
-                output.headers["Content-type"] = "text/csv"
+                output.headers["Content-type"] = "text/xls"
                 return output
             else:
                 res_json = {'status': 1, 'message': 'No Data found in the specified range'}

@@ -1,8 +1,8 @@
-version: '2.0'
+version: '3'
 services:
-  web:
+  api:
     build: .
+    volumes:
+     - .:/usr/code
     ports:
      - "2001:2001"
-    environment:
-     - WEB_ENV:PROD

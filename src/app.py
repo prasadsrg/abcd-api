@@ -18,11 +18,10 @@ def after_request(response):
 
 
 app.config.from_object(app_config[config_name])
-#app.config.from_pyfile('config.py')
 
 from utils.security_user import SecurityUser
 
-JWT.JWT_EXPIRATION_DELTA = datetime.timedelta(seconds=9999999)
+JWT.JWT_EXPIRATION_DELTA = datetime.timedelta(seconds=99999999)
 app.config['JWT_EXPIRATION_DELTA'] = datetime.timedelta(seconds=9999999)
 jwt = JWT(app, SecurityUser.authenticate, SecurityUser.identity)
 

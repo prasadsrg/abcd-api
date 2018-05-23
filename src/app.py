@@ -122,6 +122,12 @@ if __name__ == '__main__':
                 'route': '/apispec.json',
                 'rule_filter': lambda rule: True,
                 'model_filter': lambda tag: False,
+            },
+            {
+                'endpoint': '',
+                'route': '/',
+                'rule_filter': lambda rule: True,
+                'model_filter': lambda tag: False,
             }
         ],
         'swagger_ui': False,

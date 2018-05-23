@@ -16,6 +16,8 @@ pip install -r requirements.txt
 ## swagger json
 http://localhost:2001/apispec.json
 
+## swagger online
+https://abcd-api-prasadsrg.c9users.io/apispec.json
 
 ## unistall pip
 pip uninstall pip setuptools

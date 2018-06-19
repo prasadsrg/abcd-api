@@ -6,7 +6,7 @@ from flasgger import Swagger
 import os
 import datetime
 
-config_name = os.getenv('WEB_ENV', 'DEV')
+config_name = os.getenv('WEB_ENV', 'dev')
 app = Flask(__name__, instance_relative_config=False)
 api = Api(app)
 
@@ -120,6 +120,12 @@ if __name__ == '__main__':
             {
                 'endpoint': 'apispec',
                 'route': '/apispec.json',
+                'rule_filter': lambda rule: True,
+                'model_filter': lambda tag: False,
+            },
+            {
+                'endpoint': '',
+                'route': '/',
                 'rule_filter': lambda rule: True,
                 'model_filter': lambda tag: False,
             }

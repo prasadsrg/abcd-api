@@ -11,6 +11,7 @@ class Config(object):
 
 
 class QaConfig(Config):
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:Admin!234@qa.dfftech.com:3306/abcd'
     DEBUG = True
 
 class DevelopmentConfig(Config):
@@ -21,15 +22,16 @@ class DevelopmentConfig(Config):
     SQLALCHEMY_ECHO = True
 
 
-class ProductionConfig(Config):
+class MasterConfig(Config):
     """
     Production configurations
     """
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:Admin!234@qa.dfftech.com:3306/abcd'
     DEBUG = False
 
 
 app_config = {
-    'DEV': DevelopmentConfig,
-    'QA': QaConfig,
-    'PROD': ProductionConfig
+    'dev': DevelopmentConfig,
+    'qa': QaConfig,
+    'master': MasterConfig
 }

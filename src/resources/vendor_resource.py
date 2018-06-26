@@ -35,7 +35,7 @@ class VendorResource (Resource):
             req_data = req_json.get('data', None)
             res_data = self.vendor_service.search(req_data)
             print(res_data)
-            res_json = {'status': 1, 'data': [ model_to_dict(x) for x in res_data ]}
+            res_json = {'status': 1, 'data': [model_to_dict(x) for x in res_data ]}
             print(res_json)
         except Exception as e:
             if e.args:

@@ -1,6 +1,5 @@
 Flask
 Flask-JWT
-Flask-RESTful
 Flask-SQLAlchemy
 mysqlclient
 flasgger

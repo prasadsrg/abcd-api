@@ -33,5 +33,6 @@ class MasterConfig(Config):
 app_config = {
     'dev': DevelopmentConfig,
     'qa': QaConfig,
+    'prd': MasterConfig,
     'master': MasterConfig
 }

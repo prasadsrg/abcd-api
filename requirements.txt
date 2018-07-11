@@ -3,6 +3,7 @@ Flask-JWT
 Flask-SQLAlchemy
 mysqlclient
 flasgger
+Flask-Cors
 pyexcel
 pyexcel-xls
 pyexcel-xlsx

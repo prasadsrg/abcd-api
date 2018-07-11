@@ -3,7 +3,7 @@ class Config(object):
     Common configurations
     """
     HOST = '0.0.0.0'
-    PORT = 8080
+    PORT = 5000
     SECRET_KEY = 'p9Bv<3Eid9%$i01'
     SQLALCHEMY_DATABASE_URI = 'mysql://root:Admin!234@qa.dfftech.com:3306/abcd'
     SQLALCHEMY_TRACK_MODIFICATIONS = False

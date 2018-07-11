@@ -91,12 +91,12 @@ class VendorService:
 
     def search(self, req_data):
         print(req_data)
-        query = session.query(BranchModel)
-        query = query.filter(BranchModel.vid == self.session_info['vid'])
+        query = session.query(VendorModel)
+        query = query.filter(VendorModel.id == self.session_info['vid'])
         if req_data and req_data.get('name') is not None:
-            query = query.filter(BranchModel.name.like('%' + req_data['name'] + '%'))
+            query = query.filter(VendorModel.name.like('%' + req_data['name'] + '%'))
         if req_data and req_data.get('mobile') is not None:
-            query = query.filter(BranchModel.mobile.like('%' + req_data['mobile'] + '%'))
+            query = query.filter(VendorModel.mobile.like('%' + req_data['mobile'] + '%'))
         data_list = query.limit(9999).all()
         print(data_list)
         return data_list

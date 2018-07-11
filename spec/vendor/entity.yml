@@ -7,6 +7,7 @@ parameters:
     in: query
     required: true
     type: string
+    example: DFF_TECH
 responses:
     200:
         description: "status:1 is success; status: 0 is failure;"

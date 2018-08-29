@@ -14,7 +14,7 @@ source ./venv/bin/activate
 pip install -r requirements.txt
 
 ## swagger json
-http://localhost:8080/apispec.json
+http://localhost:5000/apidocs
 
 ## swagger online
 https://abcd-api-prasadsrg.c9users.io/apispec.json

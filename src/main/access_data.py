@@ -13,8 +13,9 @@ access_data_service = AccessDataService()
 @swag_from('../../spec/access_data/search.yml')
 def access_data_post():
     try:
-        print( "--------------------------")
-        print( current_identity )
+        access_data_service.session_info = current_identity
+        print("--------------------------")
+        print(current_identity)
         req_json = json.loads(request.data)
         req_data = req_json.get('data', None)
         res_data = access_data_service.search(req_data)

@@ -11,18 +11,12 @@ parameters:
             data:
                 type: object
                 properties:
-                    id:
-                        type: string
-                        example: null
                     name:
                       type: string
                       example: "abcd branch"
                     address:
                       type: object
                       properties:
-                        id:
-                          type: string
-                          example: null
                         city:
                           type: string
                           example: "abcd"
@@ -41,9 +35,6 @@ parameters:
                     img:
                       type: object
                       properties:
-                        id:
-                          type: string
-                          example: null
                         name:
                           type: string
                           example: "abcd"

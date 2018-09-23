@@ -29,3 +29,11 @@ class DataLoadService:
         """
         data_list = db.engine.execute(text(sql)).fetchall()
         return self.dataload(data_list)
+
+    def branches(self, key, param):
+        sql = """
+            select id, name from branch where vid='{}'
+        """.format(self.session_info['vid'])
+        print(sql)
+        data_list = db.engine.execute(text(sql)).fetchall()
+        return self.dataload(data_list)

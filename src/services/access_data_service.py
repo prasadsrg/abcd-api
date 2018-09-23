@@ -23,7 +23,7 @@ class AccessDataService:
     def dataload(self, results):
         returnVal = []
         for result in results:
-            data = {'id': result[0], 'name': result[1]};
+            data = {'id': result[0], 'name': result[1]}
             returnVal.append(data)
         return returnVal
 
@@ -31,14 +31,15 @@ class AccessDataService:
     def roles(self, key, param):
         sql = """
             select val, name from access_data where code='ROLE'
-        """;
-        data_list = db.engine.execute(text(sql)).fetchall();
+        """
+        data_list = db.engine.execute(text(sql)).fetchall()
         filter_list = list(filter((lambda x: x['id'] != 'SUPER_ADMIN'), self.dataload(data_list)))
         return filter_list
 
     def codes(self, key, param):
         sql = """
             select val, name from access_data where code='CODE'
-        """;
-        data_list = db.engine.execute(text(sql)).fetchall();
+        """
+        data_list = db.engine.execute(text(sql)).fetchall()
         return self.dataload(data_list)
+

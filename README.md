@@ -23,3 +23,5 @@ https://abcd-api-prasadsrg.c9users.io/apispec.json
 pip uninstall pip setuptools
 
 curl https://bootstrap.pypa.io/get-pip.py | python
+
+## export PATH=$PATH:/usr/local/mysql/bin/

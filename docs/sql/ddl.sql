@@ -203,3 +203,56 @@ create table expenses (
     updated_on timestamp not null default now()
 );
 alter table expenses add constraint expenses_branch_id foreign key (branch_id) references branch(id);
+
+--------------------------------------------------- CHAT TABLES --------------------------------------------------------
+
+create table chat_room(
+    id varchar(32) not null primary key,
+    name varchar(50),
+    is_individual boolean,
+    updated_on datetime,
+    update_by varchar(50),
+    created_on datetime,
+    created_by varchar(50)
+);
+
+create table chat_user(
+    id varchar(32) not null primary key,
+    profile_id varchar(32) not null,
+    room_id varchar(32) not null,
+    updated_on datetime,
+    update_by varchar(50),
+    created_on datetime,
+    created_by varchar(50)
+);
+
+alter table chat_user add constraint chat_user_fk_profile_id foreign key (profile_id) references profile(id);
+alter table chat_user add constraint chat_user_fk_room_id foreign key (room_id) references chat_room(id);
+
+create table chat_message(
+    id varchar(32) not null primary key,
+    profile_id varchar(32) not null,
+    room_id varchar(32) not null,
+    message varchar(256) not null,
+    updated_on datetime,
+    update_by varchar(32)
+);
+
+alter table chat_message add constraint chat_message_fk_profile_id foreign key (profile_id) references profile(id);
+alter table chat_message add constraint chat_message_fk_room_id foreign key (room_id) references chat_room(id);
+
+create table chat_view(
+    id varchar(32) not null primary key,
+    profile_id varchar(32) not null,
+    room_id varchar(32) not null,
+    chat_message_id varchar(32) not null,
+    is_view boolean,
+    updated_on datetime,
+    update_by varchar(32),
+    created_on datetime,
+    created_by varchar(32)
+);
+
+alter table chat_view add constraint chat_view_fk_profile_id foreign key (profile_id) references profile(id);
+alter table chat_view add constraint chat_view_fk_room_id foreign key (room_id) references chat_room(id);
+alter table chat_view add constraint chat_view_fk_chat_message_id foreign key (chat_message_id) references chat_message(id);

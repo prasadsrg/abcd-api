@@ -5,6 +5,7 @@ from models.app_data_model import AppDataModel
 from mappers.app_data_mapper import AppDataMapper
 import datetime
 
+
 class AppDataService:
     session_info = None
 
@@ -17,7 +18,6 @@ class AppDataService:
         model.updatedBy = self.session_info['id']
         model.updatedOn = datetime.datetime.now()
         AppDataMapper(model, view).model_mapping()
-
 
     def is_validate(self, model, is_new):
 

@@ -8,6 +8,7 @@ from mappers.address_mapper import AddressMapper
 from mappers.img_mapper import ImgMapper
 import datetime
 
+
 class BranchService:
 
     session_info = None

@@ -1,9 +1,13 @@
 from db import session
-from utils.util import uid
+from sqlalchemy import func
+from utils.util import uid, model_to_dict
 from models.chat_user_model import ChatUserModel
 from models.chat_room_model import ChatRoomModel
+from models.chat_view_model import ChatViewModel
+from models.chat_message_model import ChatMessageModel
 from mappers.chat_room_mapper import ChatRoomMapper
 from mappers.chat_user_mapper import ChatUserMapper
+import functools
 import datetime
 
 
@@ -13,14 +17,15 @@ class ChatUserService:
 
     def mapping(self, model, view):
 
+        model.room = session.query(ChatUserModel).filter(id=view["roomId"]).first() if view.get("roomId") \
+                                                                                       is not None else ChatRoomModel()
         if model.id is None:
             model.id = uid()
-            model.room = ChatRoomModel()
-            model.room.id = uid()
+            model.room.id = uid() if view.get("roomId") is None else view.get("roomId")
             model.roomId = model.room.id
             model.room.name = view["name"] if view["isIndividual"] is True else uid()
             model.room.isIndividual = view["isIndividual"]
-            model.profileId = self.session_info.get("id")
+            model.profileId = view["profileId"]
             model.createdOn = datetime.datetime.now()
             model.createdBy = self.session_info["name"] if self.session_info.get("name") else "SYSTEM"
         model.updatedBy = self.session_info["name"] if self.session_info.get("name") else "SYSTEM"
@@ -62,8 +67,24 @@ class ChatUserService:
 
     def search(self, req_data):
         query = session.query(ChatUserModel)
-        query = query.filter(ChatUserModel.vid == self.session_info['vid'])
-        if req_data and req_data.get('name') is not None:
-            query = query.filter(ChatUserModel.name.like('%' + req_data['name'] + '%'))
+        if req_data and req_data.get('profileId') is not None:
+            query = query.filter_by(profileId=req_data["profileId"])
         data_list = query.limit(9999).all()
+        data_list = list(map(functools.partial(self.map_room_names, req_data["profileId"]), data_list))
         return data_list
+
+    @staticmethod
+    def map_room_names(data, profileId):
+        data = model_to_dict(data)
+        if data["room"]["isIndividaual"] is True:
+            user = session.query(ChatUserModel).filter(
+                ChatUserModel.roomId == ChatUserModel.data["roomId"], ChatUserModel.profileId != profileId
+            ).first()
+            data["room"]["name"] = user.profile.name
+        actualMessages = session.query(ChatMessageModel).filter(roomId=data["room"]["id"]).count()
+        viewedMessages = session.query(ChatViewModel).filter(
+            ChatViewModel.roomId == data["room"]["id"],
+            ChatViewModel.profileId == profileId
+        ).count()
+        data["room"]["unread"] = actualMessages - viewedMessages
+        return data

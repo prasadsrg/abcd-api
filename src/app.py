@@ -6,6 +6,7 @@ from flask_cors import CORS
 import datetime
 from configure import register, swagger
 from utils.security_user import authenticate, identity
+from main.websocket import socketio
 
 def create_app():
     config_name = os.getenv('WEB_ENV', 'dev')
@@ -17,6 +18,7 @@ def create_app():
     app.config['JWT_AUTH_URL_RULE'] = '/auth'
     jwt = JWT(app, authenticate, identity)
     register.register_blueprints(app)
+    socketio.init_app(app)
     swagger.swagger(app)
     CORS(app)
 
@@ -27,6 +29,5 @@ app = create_app()
 if __name__ == '__main__':
     from db import db
     db.init_app(app)
-    app.run(host=app.config['HOST'], port=app.config['PORT'], debug=app.config['DEBUG'])
-
-
+    # app.run(host=app.config['HOST'], port=app.config['PORT'], debug=app.config['DEBUG'])
+    socketio.run(app, host=app.config['HOST'], port=app.config['PORT'], debug=app.config['DEBUG'])

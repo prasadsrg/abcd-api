@@ -1,5 +1,5 @@
 from db import session
-from utils.util import uid
+from utils.util import uid, model_to_dict
 from models.chat_message_model import ChatMessageModel
 from models.chat_room_model import ChatRoomModel
 from mappers.chat_room_mapper import ChatRoomMapper
@@ -61,8 +61,8 @@ class ChatMessageService:
 
     def search(self, req_data):
         query = session.query(ChatMessageModel)
-        query = query.filter(ChatMessageModel.profileId == self.session_info['profileId'])
-        if req_data and req_data.get('name') is not None:
-            query = query.filter(ChatMessageModel.name.like('%' + req_data['name'] + '%'))
+        if req_data and req_data.get('roomId') is not None:
+            query = query.filter(ChatMessageModel.roomId == (req_data["roomId"]))
         data_list = query.limit(9999).all()
+        data_list = list(map(model_to_dict, data_list))
         return data_list

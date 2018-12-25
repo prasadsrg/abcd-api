@@ -55,7 +55,6 @@ class ChatRoomService:
 
     def search(self, req_data):
         query = session.query(ChatRoomModel)
-        query = query.filter(ChatRoomModel.vid == self.session_info['vid'])
         if req_data and req_data.get('name') is not None:
             query = query.filter(ChatRoomModel.name.like('%' + req_data['name'] + '%'))
         data_list = query.limit(9999).all()

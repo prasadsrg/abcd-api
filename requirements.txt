@@ -7,4 +7,6 @@ Flask-Cors
 pyexcel
 pyexcel-xls
 pyexcel-xlsx
-
+flask-socketio
+eventlet
+greenlet

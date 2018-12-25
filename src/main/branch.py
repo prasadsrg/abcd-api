@@ -12,7 +12,7 @@ branch_service = BranchService()
 @jwt_required()
 @swag_from('../../spec/branch/save.yml')
 def branch_put():
-    try :
+    try:
         branch_service.session_info = current_identity
         req_json = json.loads(request.data)
         req_data = req_json.get('data', None)

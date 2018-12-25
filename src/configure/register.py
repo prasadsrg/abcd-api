@@ -1,6 +1,6 @@
 from main import (
     access_data, access_menu, app_data, branch, consumer,
-    data_chart, data_load, data_report, profile, vendor
+    data_chart, data_load, data_report, profile, vendor, websocket
 )
 from utils import security_user
 
@@ -16,3 +16,4 @@ def register_blueprints(app):
     app.register_blueprint(data_report.blueprint)
     app.register_blueprint(profile.blueprint)
     app.register_blueprint(vendor.blueprint)
+    app.register_blueprint(websocket.blueprint)

@@ -1,5 +1,5 @@
 from db import session
-from utils.util import uid
+from utils.util import uid, model_to_dict
 from models.chat_message_model import ChatMessageModel
 from models.chat_room_model import ChatRoomModel
 from models.chat_view_model import ChatViewModel
@@ -52,6 +52,9 @@ class ChatViewService:
                         return False
         return True
 
+    def model(self, _id):
+        return session.query(ChatViewModel).filter_by(id=_id).first()
+
     def save(self, req_data):
         chat_message = None
         _id = req_data.get('id', None)
@@ -67,13 +70,13 @@ class ChatViewService:
         else:
             raise Exception('Record already exists')
 
-    def model(self, _id):
-        return session.query(ChatViewModel).filter_by(id=_id).first()
-
     def search(self, req_data):
         query = session.query(ChatViewModel)
-        query = query.filter(ChatViewModel.profileId == self.session_info['profileId'])
-        if req_data and req_data.get('name') is not None:
-            query = query.filter(ChatViewModel.name.like('%' + req_data['name'] + '%'))
+        if req_data and req_data.get('roomId') is not None:
+            query = query.filter(
+                ChatViewModel.profileId == req_data["profileId"],
+                ChatViewModel.roomId == req_data["roomId"]
+            )
         data_list = query.limit(9999).all()
+        data_list = list(map(model_to_dict, data_list))
         return data_list

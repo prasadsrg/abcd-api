@@ -56,8 +56,14 @@ def add_user():
         # chat_user_service.session_info = current_identity
         req_json = json.loads(request.data)
         req_data = req_json.get('data', None)
-        res_data = chat_user_service.save(req_data)
-        res_json = {'status': 1, 'data': res_data}
+        if req_data["isIndividual"] == True and req_data.get("roomId") is None:
+            req_data["profileId"] = req_data["senderId"]
+            res_data = chat_user_service.save(req_data)
+            req_data["profileId"] = req_data["recieverId"]
+            res_json = {'status': 1, 'data': res_data}
+        else:
+            res_data = chat_user_service.save(req_data)
+            res_json = {'status': 1, 'data': res_data}
     except Exception as e:
         if e.args:
             res_data = e.args[0]

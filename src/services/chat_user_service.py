@@ -58,7 +58,7 @@ class ChatUserService:
         if self.is_validate(chat_user, False if _id else True):
             session.add(chat_user)
             session.commit()
-            return {'message': 'Saved Successfully', 'id': chat_user.id}
+            return {'message': 'Saved Successfully', 'id': chat_user.room.id}
         else:
             raise Exception('Record already exists')
 

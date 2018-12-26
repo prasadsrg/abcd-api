@@ -17,7 +17,7 @@ class ChatUserService:
 
     def mapping(self, model, view):
 
-        model.room = session.query(ChatUserModel).filter(id=view["roomId"]).first() if view.get("roomId") \
+        model.room = session.query(ChatRoomModel).filter(id=view["roomId"]).first() if view.get("roomId") \
                                                                                        is not None else ChatRoomModel()
         if model.id is None:
             model.id = uid()

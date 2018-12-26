@@ -22,7 +22,7 @@ class ChatViewService:
             model.roomId = model.room.id
             model.room.name = view["name"] if view["isIndividual"] is True else uid()
             model.room.isIndividual = view["isIndividual"]
-            model.profileId = self.session_info.get("id")
+            model.profileId = view["profileId"]
             model.chatMessage = ChatMessageModel()
             model.chatMessage.id = uid()
             model.chatMessageId = model.chatMessage.id

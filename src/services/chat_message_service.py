@@ -20,7 +20,7 @@ class ChatMessageService:
             model.roomId = model.room.id
             model.room.name = view["name"] if view["isIndividual"] is True else uid()
             model.room.isIndividual = view["isIndividual"]
-            model.profileId = self.session_info.get("id")
+            model.profileId = view["profileId"]
             model.message = view["message"]
         model.updatedBy = self.session_info["name"] if self.session_info.get("name") else "SYSTEM"
         model.updatedOn = datetime.datetime.now()

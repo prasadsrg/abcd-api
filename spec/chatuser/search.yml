@@ -1,0 +1,26 @@
+ChatUser Information Search
+---
+tags:
+  - ChatUser
+parameters:
+  - name: body
+    in: body
+    required: false
+    schema:
+      type: object
+      properties:
+          data:
+            type: object
+            properties:
+              profileId:
+                type: string
+                example: "profileId"
+              senderId:
+                type: string
+                example: use senderId and receiverId only if isIndividaual is true
+              receiverId:
+                type: string
+                example: use senderId and receiverId only if isIndividaual is true
+responses:
+ 200:
+   description: A single user item

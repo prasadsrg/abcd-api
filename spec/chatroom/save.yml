@@ -1,0 +1,23 @@
+ChatRoom Information
+---
+tags:
+  - ChatUser
+parameters:
+  - name: body
+    in: body
+    schema:
+        type: object
+        properties:
+            data:
+                type: object
+                properties:
+                    name:
+                      type: string
+                      example: "abcd"
+                    isIndividual:
+                      type: boolean
+                      example : "true"
+
+responses:
+    200:
+        description: "status:1 is success; status: 0 is failure;"

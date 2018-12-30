@@ -12,25 +12,27 @@ class ChatMessageService:
     session_info = None
 
     def mapping(self, model, view):
-
+        print("=======================================================================")
+        print(view)
+        print("=======================================================================")
         if model.id is None:
             model.id = uid()
             model.room = ChatRoomModel()
-            model.room.id = uid()
-            model.roomId = model.room.id
-            model.room.name = view["name"] if view["isIndividual"] is True else uid()
-            model.room.isIndividual = view["isIndividual"]
+            # model.room.id = uid()
+            model.roomId = view["roomId"]
+            # model.room.name = view["name"] if view["isIndividual"] is True else uid()
+            # model.room.isIndividual = view["isIndividual"]
             model.profileId = view["profileId"]
             model.message = view["message"]
-        model.updatedBy = self.session_info["name"] if self.session_info.get("name") else "SYSTEM"
+        model.updatedBy = "SYSTEM"
         model.updatedOn = datetime.datetime.now()
-        ChatRoomMapper(model, view.get("room")).model_mapping()
+        # ChatRoomMapper(model, view.get("room")).model_mapping()
         ChatMessageMapper(model, view).model_mapping()
 
     def is_validate(self, model, is_new):
 
         query = session.query(ChatMessageModel)\
-            .filter((ChatMessageModel.profileId == model.profileId) | (ChatMessageModel.roomId == model.roomId))
+            .filter((ChatMessageModel.messageId == model.messageId) | (ChatMessageModel.roomId == model.roomId))
         data_list = query.all()
         if data_list:
             if is_new:
@@ -42,19 +44,19 @@ class ChatMessageService:
         return True
 
     def save(self, req_data):
-        chat_user = None
+        chat_message = None
         _id = req_data.get('id', None)
         if _id is not None:
-            chat_user = session.query(ChatMessageModel).filter_by(id=_id).first()
-        if chat_user is None:
-            chat_user = ChatMessageModel()
-        self.mapping(chat_user, req_data)
-        if self.is_validate(chat_user, False if _id else True):
-            session.add(chat_user)
-            session.commit()
-            return {'message': 'Saved Successfully', 'id': chat_user.id}
-        else:
-            raise Exception('Record already exists')
+            chat_message = session.query(ChatMessageModel).filter_by(id=_id).first()
+        if chat_message is None:
+            chat_message = ChatMessageModel()
+        self.mapping(chat_message, req_data)
+        # if self.is_validate(chat_message, False if _id else True):
+        session.add(chat_message)
+        session.commit()
+        return {'message': 'Saved Successfully', 'id': chat_message.id}
+        # else:
+        #     raise Exception('Record already exists')
 
     def model(self, _id):
         return session.query(ChatMessageModel).filter_by(id=_id).first()
@@ -66,3 +68,8 @@ class ChatMessageService:
         data_list = query.limit(9999).all()
         data_list = list(map(model_to_dict, data_list))
         return data_list
+
+    @staticmethod
+    def map_maessage_model(data):
+        data = model_to_dict(data)
+        del data["profile"]

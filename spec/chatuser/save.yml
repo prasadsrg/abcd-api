@@ -1,0 +1,31 @@
+ChatUser Information
+---
+tags:
+  - ChatUser
+parameters:
+  - name: body
+    in: body
+    schema:
+        type: object
+        properties:
+            data:
+                type: object
+                properties:
+                    roomId:
+                      type: string
+                      example: "roomId"
+                    isIndividual:
+                      type: boolean
+                      example: true
+                    profileId:
+                      type: string
+                      example: "profileId"
+                    senderId:
+                      type: string
+                      example: use senderId and receiverId only if isIndividaual is true
+                    receiverId:
+                      type: string
+                      example: use senderId and receiverId only if isIndividaual is true
+responses:
+    200:
+        description: "status:1 is success; status: 0 is failure;"

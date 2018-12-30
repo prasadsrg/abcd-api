@@ -10,14 +10,13 @@ from mappers.chat_user_mapper import ChatUserMapper
 import functools
 import datetime
 
-
 class ChatUserService:
 
     session_info = None
 
     def mapping(self, model, view):
 
-        model.room = session.query(ChatRoomModel).filter(id=view["roomId"]).first() if view.get("roomId") \
+        model.room = session.query(ChatRoomModel).filter_by(id=view["roomId"]).first() if view.get("roomId") \
                                                                                        is not None else ChatRoomModel()
         if model.id is None:
             model.id = uid()
@@ -58,7 +57,7 @@ class ChatUserService:
         if self.is_validate(chat_user, False if _id else True):
             session.add(chat_user)
             session.commit()
-            return {'message': 'Saved Successfully', 'id': chat_user.room.id}
+            return {'message': 'Saved Successfully', 'id': chat_user.id}
         else:
             raise Exception('Record already exists')
 
@@ -69,22 +68,39 @@ class ChatUserService:
         query = session.query(ChatUserModel)
         if req_data and req_data.get('profileId') is not None:
             query = query.filter_by(profileId=req_data["profileId"])
-        data_list = query.limit(9999).all()
-        data_list = list(map(functools.partial(self.map_room_names, req_data["profileId"]), data_list))
+            data_list = query.limit(9999).all()
+            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+            data_list = [self.map_room_names(req_data["profileId"], x) for x in data_list]
+            print("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        elif req_data.get("receiverId") is not None and req_data.get("senderId") is not None \
+                and req_data.get("isIndividual") is True:
+            query = query.join(ChatRoomModel).filter(
+                ChatUserModel.profileId == req_data["senderId"],
+                ChatUserModel.profileId == req_data["receiverId"],
+                ChatRoomModel.isIndividual == True
+            )
+            data_list = query.limit(9999).all()
+            data_list = [self.map_room_names(req_data["profileId"], x) for x in data_list]
+        else:
+            data_list = []
         return data_list
 
     @staticmethod
-    def map_room_names(data, profileId):
+    def map_room_names(profileId, data):
+        print("========================================================================================")
+        print(data)
         data = model_to_dict(data)
-        if data["room"]["isIndividaual"] is True:
+        print("========================================================================================")
+        if data["room"]["isIndividual"] is True:
             user = session.query(ChatUserModel).filter(
-                ChatUserModel.roomId == ChatUserModel.data["roomId"], ChatUserModel.profileId != profileId
+                ChatUserModel.roomId == data["roomId"], ChatUserModel.profileId != profileId
             ).first()
             data["room"]["name"] = user.profile.name
-        actualMessages = session.query(ChatMessageModel).filter(roomId=data["room"]["id"]).count()
+        actualMessages = session.query(ChatMessageModel).filter(ChatMessageModel.roomId == data["room"]["id"]).count()
         viewedMessages = session.query(ChatViewModel).filter(
             ChatViewModel.roomId == data["room"]["id"],
             ChatViewModel.profileId == profileId
         ).count()
         data["room"]["unread"] = actualMessages - viewedMessages
+        del data["profile"]
         return data

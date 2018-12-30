@@ -1,0 +1,20 @@
+ChatMessage Information Search
+---
+tags:
+  - ChatUser
+parameters:
+  - name: body
+    in: body
+    required: false
+    schema:
+      type: object
+      properties:
+          data:
+            type: object
+            properties:
+              roomId:
+                type: string
+                example: "roomId"
+responses:
+ 200:
+   description: A single user item

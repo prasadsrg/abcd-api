@@ -211,7 +211,7 @@ create table chat_room(
     name varchar(50),
     is_individual boolean,
     updated_on datetime,
-    update_by varchar(50),
+    updated_by varchar(50),
     created_on datetime,
     created_by varchar(50)
 );
@@ -221,7 +221,7 @@ create table chat_user(
     profile_id varchar(32) not null,
     room_id varchar(32) not null,
     updated_on datetime,
-    update_by varchar(50),
+    updated_by varchar(50),
     created_on datetime,
     created_by varchar(50)
 );
@@ -235,7 +235,7 @@ create table chat_message(
     room_id varchar(32) not null,
     message varchar(256) not null,
     updated_on datetime,
-    update_by varchar(32)
+    updated_by varchar(32)
 );
 
 alter table chat_message add constraint chat_message_fk_profile_id foreign key (profile_id) references profile(id);
@@ -248,7 +248,7 @@ create table chat_view(
     chat_message_id varchar(32) not null,
     is_view boolean,
     updated_on datetime,
-    update_by varchar(32),
+    updated_by varchar(32),
     created_on datetime,
     created_by varchar(32)
 );

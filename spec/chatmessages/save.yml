@@ -1,0 +1,24 @@
+ChatMessage Information
+---
+tags:
+  - ChatUser
+parameters:
+  - name: body
+    in: body
+    schema:
+        type: object
+        properties:
+            data:
+                type: object
+                properties:
+                    message:
+                      type: string
+                      example: "abcd"
+                    profileId:
+                      type: string
+                      example: "profileId"
+
+
+responses:
+    200:
+        description: "status:1 is success; status: 0 is failure;"
